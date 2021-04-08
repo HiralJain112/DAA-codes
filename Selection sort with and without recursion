@@ -1,0 +1,140 @@
+#include <stdio.h>
+void
+RselectionAsc (int arr[], int i, int j, int size, int flag)
+{
+  int temp;
+  if (i < size - 1)
+    {
+      if (flag)
+	{
+	  j = i + 1;
+	}
+      if (j < size)
+	{
+	  if (arr[i] > arr[j])
+	    {
+	      temp = arr[i];
+	      arr[i] = arr[j];
+	      arr[j] = temp;
+	    }
+	  RselectionAsc (arr, i, j + 1, size, 0);
+	}
+      RselectionAsc (arr, i + 1, 0, size, 1);
+    }
+}
+
+void
+RselectionDesc (int arr[], int i, int j, int size, int flag)
+{
+  int temp;
+
+  if (i < size - 1)
+    {
+      if (flag)
+	{
+	  j = i + 1;
+	}
+      if (j < size)
+	{
+	  if (arr[i] < arr[j])
+	    {
+	      temp = arr[i];
+	      arr[i] = arr[j];
+	      arr[j] = temp;
+	    }
+	  RselectionDesc (arr, i, j + 1, size, 0);
+	}
+      RselectionDesc (arr, i + 1, 0, size, 1);
+    }
+}
+
+void
+selectionAsc (int arr[], int n)
+{
+  int i, min, j, temp;
+  for (i = 0; i < n - 1; i++)
+    {
+      min = i;
+      for (j = i + 1; j < n; j++)
+	if (arr[j] < arr[min])
+	  min = j;
+      temp = arr[i];
+      arr[i] = arr[min];
+      arr[min] = temp;
+    }
+
+}
+
+void
+selectionDesc (int arr[], int n)
+{
+  int i, max, j, temp;
+  for (i = 0; i < n - 1; i++)
+    {
+      max = i;
+      for (j = i + 1; j < n; j++)
+	if (arr[j] > arr[max])
+	  max = j;
+      temp = arr[i];
+      arr[i] = arr[max];
+      arr[max] = temp;
+    }
+
+}
+
+int
+main ()
+{
+  int arr[100], size, temp, i, j, choice;
+
+  printf ("Enter the size of the list: ");
+  scanf ("%d", &size);
+  printf ("Enter the elements in list:\n");
+  for (i = 0; i < size; i++)
+    {
+      scanf ("%d", &arr[i]);
+    }
+  printf
+    ("\nChoose any one option from below:\n1.With Recursion\n2.Without Recursion\n");
+  scanf ("%d", &choice);
+  switch (choice)
+  {
+    case 1:
+      {
+	RselectionAsc (arr, 0, 0, size, 1);
+	printf ("The sorted array in ascending order is\n");
+	for (i = 0; i < size; i++)
+	  {
+	    printf ("%d  ", arr[i]);
+	  }
+	RselectionDesc (arr, 0, 0, size, 1);
+	printf ("\nThe sorted array in Descending order is\n");
+	for (i = 0; i < size; i++)
+	  {
+	    printf ("%d  ", arr[i]);
+	  }
+      }
+      break;
+    case 2:
+      {
+	selectionAsc (arr, size);
+	printf ("The sorted array in ascending order is\n");
+	for (i = 0; i < size; i++)
+	  {
+	    printf ("%d  ", arr[i]);
+	  }
+	selectionDesc (arr, size);
+	printf ("\nThe sorted arr in Descending order is\n");
+	for (i = 0; i < size; i++)
+	  {
+	    printf ("%d  ", arr[i]);
+	  }
+      }break;
+    default:
+      {
+	printf ("\nInvalid choice!!!");
+      }
+    };
+
+  return 0;
+}
